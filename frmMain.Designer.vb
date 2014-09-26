@@ -42,19 +42,20 @@ Partial Class frmMain
         Me.PictureBox1.InitialImage = Nothing
         Me.PictureBox1.Location = New System.Drawing.Point(12, 12)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(128, 128)
+        Me.PictureBox1.Size = New System.Drawing.Size(178, 128)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
         'cmdStartStop
         '
-        Me.cmdStartStop.Disabled = False
+        Me.cmdStartStop.Disabled = True
         Me.cmdStartStop.Image = Nothing
         Me.cmdStartStop.LayeringHost = Nothing
         Me.cmdStartStop.Location = New System.Drawing.Point(12, 146)
         Me.cmdStartStop.MouseOver = False
         Me.cmdStartStop.Name = "cmdStartStop"
-        Me.cmdStartStop.Size = New System.Drawing.Size(128, 38)
+        Me.cmdStartStop.Size = New System.Drawing.Size(178, 38)
         Me.cmdStartStop.TabIndex = 1
         Me.cmdStartStop.Text = "Start"
         Me.cmdStartStop.UseVisualStyleBackColor = True
@@ -65,11 +66,11 @@ Partial Class frmMain
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtLog.Location = New System.Drawing.Point(146, 12)
+        Me.txtLog.Location = New System.Drawing.Point(196, 12)
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
-        Me.txtLog.Size = New System.Drawing.Size(714, 430)
+        Me.txtLog.Size = New System.Drawing.Size(762, 307)
         Me.txtLog.TabIndex = 2
         '
         'txtInput
@@ -78,21 +79,21 @@ Partial Class frmMain
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtInput.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.txtInput.Location = New System.Drawing.Point(146, 448)
+        Me.txtInput.Location = New System.Drawing.Point(196, 325)
         Me.txtInput.Name = "txtInput"
-        Me.txtInput.Size = New System.Drawing.Size(714, 20)
+        Me.txtInput.Size = New System.Drawing.Size(762, 20)
         Me.txtInput.TabIndex = 3
         '
         'cmdAdd
         '
         Me.cmdAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdAdd.Disabled = False
+        Me.cmdAdd.Disabled = True
         Me.cmdAdd.Image = Nothing
         Me.cmdAdd.LayeringHost = Nothing
-        Me.cmdAdd.Location = New System.Drawing.Point(12, 448)
+        Me.cmdAdd.Location = New System.Drawing.Point(12, 325)
         Me.cmdAdd.MouseOver = False
         Me.cmdAdd.Name = "cmdAdd"
-        Me.cmdAdd.Size = New System.Drawing.Size(61, 20)
+        Me.cmdAdd.Size = New System.Drawing.Size(71, 20)
         Me.cmdAdd.TabIndex = 4
         Me.cmdAdd.Text = "Add..."
         Me.cmdAdd.UseVisualStyleBackColor = True
@@ -103,10 +104,10 @@ Partial Class frmMain
         Me.cmdRemoveImage.Disabled = True
         Me.cmdRemoveImage.Image = Nothing
         Me.cmdRemoveImage.LayeringHost = Nothing
-        Me.cmdRemoveImage.Location = New System.Drawing.Point(79, 448)
+        Me.cmdRemoveImage.Location = New System.Drawing.Point(119, 325)
         Me.cmdRemoveImage.MouseOver = False
         Me.cmdRemoveImage.Name = "cmdRemoveImage"
-        Me.cmdRemoveImage.Size = New System.Drawing.Size(61, 20)
+        Me.cmdRemoveImage.Size = New System.Drawing.Size(71, 20)
         Me.cmdRemoveImage.TabIndex = 5
         Me.cmdRemoveImage.Text = "Remove"
         Me.cmdRemoveImage.UseVisualStyleBackColor = True
@@ -119,7 +120,7 @@ Partial Class frmMain
         Me.cmdSetPassword.Location = New System.Drawing.Point(12, 190)
         Me.cmdSetPassword.MouseOver = False
         Me.cmdSetPassword.Name = "cmdSetPassword"
-        Me.cmdSetPassword.Size = New System.Drawing.Size(128, 20)
+        Me.cmdSetPassword.Size = New System.Drawing.Size(178, 20)
         Me.cmdSetPassword.TabIndex = 6
         Me.cmdSetPassword.Text = "Set Teacher Password..."
         Me.cmdSetPassword.UseVisualStyleBackColor = True
@@ -135,7 +136,7 @@ Partial Class frmMain
         Me.lstImages.IntegralHeight = False
         Me.lstImages.Location = New System.Drawing.Point(12, 216)
         Me.lstImages.Name = "lstImages"
-        Me.lstImages.Size = New System.Drawing.Size(128, 226)
+        Me.lstImages.Size = New System.Drawing.Size(178, 103)
         Me.lstImages.TabIndex = 7
         '
         'tmrRefreshData
@@ -148,7 +149,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(32, Byte), Integer), CType(CType(32, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(872, 480)
+        Me.ClientSize = New System.Drawing.Size(970, 357)
         Me.Controls.Add(Me.lstImages)
         Me.Controls.Add(Me.cmdSetPassword)
         Me.Controls.Add(Me.cmdRemoveImage)
