@@ -70,7 +70,6 @@ Module Server
                 Exit Sub
             End If
             img.Save(c.Response.OutputStream, Imaging.ImageFormat.Png)
-            c.Response.ContentLength64 = c.Response.OutputStream.Position
             c.Response.OutputStream.Close()
             Exit Sub
         End If
