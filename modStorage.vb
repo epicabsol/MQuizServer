@@ -86,6 +86,7 @@
     Public Sub AddImage(Image As Image, Name As String)
         Try
             Image.Save(NameToPath(Name))
+            frmMain.Log("Added Image """ & Name & """.")
         Catch ex As Exception
             frmMain.Log("Error 003: " & ex.ToString)
         End Try
@@ -96,6 +97,7 @@
         If IO.File.Exists(NameToPath(Name)) Then
             Try
                 IO.File.Delete(NameToPath(Name))
+                frmMain.Log("Removed Image """ & Name & """.")
             Catch ex As Exception
                 frmMain.Log("Error 004: " & ex.ToString)
             End Try

@@ -20,6 +20,10 @@
 
     Public Sub Log(Message As String)
         txtLog.Text &= vbNewLine & Message
+        Dim s As New IO.StreamWriter(IO.File.OpenWrite("Data\log.txt"))
+        s.WriteLine(Now.ToString() & " - " & Message)
+        s.Close()
+        s.Dispose()
     End Sub
 
     Private Sub cmdStartStop_Click(sender As Object, e As EventArgs) Handles cmdStartStop.Click
