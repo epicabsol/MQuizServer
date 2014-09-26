@@ -27,7 +27,15 @@
     End Sub
 
     Private Sub cmdStartStop_Click(sender As Object, e As EventArgs) Handles cmdStartStop.Click
-
+        If ServerRunning Then
+            cmdStartStop.Text = "Start"
+            StopServer()
+            PictureBox1.Image = My.Resources.offline_button_x128
+        Else
+            cmdStartStop.Text = "Stop"
+            StartServer()
+            PictureBox1.Image = My.Resources.online_button_x128
+        End If
     End Sub
 
     Private Sub lstImages_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstImages.SelectedIndexChanged
