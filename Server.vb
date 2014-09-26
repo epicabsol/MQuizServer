@@ -61,6 +61,18 @@ Module Server
             Else
                 responseString = "bad"
             End If
+        ElseIf Strings.Left(c.Request.RawUrl, 5) = "/img/" Then
+            Dim imagename As String = Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 5))
+            Dim img As Image = GetImage(imagename)
+            If IsNothing(img) Then
+                c.Response.ContentLength64 = 0
+                c.Response.OutputStream.Close()
+                Exit Sub
+            End If
+            img.Save(c.Response.OutputStream, Imaging.ImageFormat.Png)
+            c.Response.ContentLength64 = c.Response.OutputStream.Position
+            c.Response.OutputStream.Close()
+            Exit Sub
         End If
 
         Dim response() As Byte = System.Text.Encoding.UTF8.GetBytes(responseString)
