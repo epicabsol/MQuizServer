@@ -108,10 +108,10 @@
 
 #Region "Encryption"
     Public Function Encrypt(Input As String) As String
-        Return Input
+        Return Uri.EscapeDataString(Input)
     End Function
     Public Function Decrypt(Input As String) As String
-        Return Input
+        Return Uri.UnescapeDataString(Input)
     End Function
 #End Region
 
