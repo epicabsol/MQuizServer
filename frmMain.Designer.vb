@@ -22,6 +22,7 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.cmdStartStop = New Xenon.XenonButton()
         Me.txtLog = New Xenon.XenonTextBox()
@@ -30,6 +31,7 @@ Partial Class frmMain
         Me.cmdRemoveImage = New Xenon.XenonButton()
         Me.cmdSetPassword = New Xenon.XenonButton()
         Me.lstImages = New Xenon.XenonListBox()
+        Me.tmrRefreshData = New System.Windows.Forms.Timer(Me.components)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -136,6 +138,11 @@ Partial Class frmMain
         Me.lstImages.Size = New System.Drawing.Size(128, 226)
         Me.lstImages.TabIndex = 7
         '
+        'tmrRefreshData
+        '
+        Me.tmrRefreshData.Enabled = True
+        Me.tmrRefreshData.Interval = 10000
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -166,5 +173,6 @@ Partial Class frmMain
     Friend WithEvents cmdRemoveImage As Xenon.XenonButton
     Friend WithEvents cmdSetPassword As Xenon.XenonButton
     Friend WithEvents lstImages As Xenon.XenonListBox
+    Friend WithEvents tmrRefreshData As System.Windows.Forms.Timer
 
 End Class
