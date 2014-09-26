@@ -1,5 +1,9 @@
 ﻿Public Class frmMain
 
+    Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If ServerRunning Then StopServer()
+    End Sub
+
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RefreshData()
     End Sub

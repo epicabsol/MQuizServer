@@ -16,9 +16,6 @@ Module Server
         ServerThread = New Thread(AddressOf RunServerThreadLoop)
         ServerThread.Start()
     End Sub
-    Public Sub StopServerAsync()
-        PleaseExit = True
-    End Sub
     Public Sub StopServer()
         PleaseExit = True
         Listener.Stop()
