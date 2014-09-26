@@ -68,6 +68,7 @@ Module Server
             End If
             img.Save(c.Response.OutputStream, Imaging.ImageFormat.Png)
             c.Response.OutputStream.Close()
+            img.Dispose()
             Exit Sub
         End If
 
