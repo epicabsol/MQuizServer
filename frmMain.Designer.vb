@@ -130,7 +130,7 @@ Partial Class frmMain
         'tmrRefreshData
         '
         Me.tmrRefreshData.Enabled = True
-        Me.tmrRefreshData.Interval = 10000
+        Me.tmrRefreshData.Interval = 300
         '
         'frmMain
         '

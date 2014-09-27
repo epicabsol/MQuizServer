@@ -1,15 +1,25 @@
 ﻿Public Class frmMain
-
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If ServerRunning Then StopServer()
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RefreshData()
+        If Not txtLog.IsHandleCreated Then
+            CreateHandle()
+        End If
     End Sub
 
     Private Sub tmrRefreshData_Tick(sender As Object, e As EventArgs) Handles tmrRefreshData.Tick
-        Invoke(Sub() RefreshData())
+        If txtLog.InvokeRequired Then
+            Me.Invoke(New Action(Of Object, EventArgs)(AddressOf tmrRefreshData_Tick), sender, e)
+        Else
+            For i As Long = LogQueue.Count - 1 To 0 Step -1
+                txtLog.AppendText(vbNewLine & LogQueue(i))
+                LogQueue.RemoveAt(i)
+            Next
+            RefreshData()
+        End If
     End Sub
 
     Private Sub cmdSetPassword_Click(sender As Object, e As EventArgs) Handles cmdSetPassword.Click
@@ -23,11 +33,15 @@
     End Sub
 
     Public Sub Log(Message As String)
-        txtLog.Text &= vbNewLine & Message
-        Dim s As New IO.StreamWriter(IO.File.OpenWrite("Data\log.txt"))
-        s.WriteLine(Now.ToString() & " - " & Message)
-        s.Close()
-        s.Dispose()
+        If txtLog.InvokeRequired Then
+            Invoke(New Action(Of String)(AddressOf Log), Message)
+        Else
+            LogQueue.Add(Message & vbNewLine)
+            Dim s As New IO.StreamWriter(IO.File.OpenWrite("Data\log.txt"))
+            s.WriteLine(Now.ToString() & " - " & Message)
+            s.Close()
+            s.Dispose()
+        End If
     End Sub
 
     Private Sub cmdStartStop_Click(sender As Object, e As EventArgs) Handles cmdStartStop.Click

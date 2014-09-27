@@ -2,6 +2,7 @@
 Imports System.Net
 
 Module Server
+    Public LogQueue As New List(Of String)
     Private ServerThread As Thread
     Private PleaseExit As Boolean = False
     Private Exited As Boolean = False
@@ -13,6 +14,7 @@ Module Server
         End Get
     End Property
     Public Sub StartServer()
+
         ServerThread = New Thread(AddressOf RunServerThreadLoop)
         ServerThread.Start()
     End Sub
@@ -35,7 +37,7 @@ Module Server
             Try
                 c = Listener.GetContext()
                 Respond(c)
-            Catch ex As Exception
+            Catch ex As System.Net.HttpListenerException
                 'Listener.Stop was (probably) called, so no worries here.
             End Try
         Loop
@@ -55,8 +57,10 @@ Module Server
             Dim code As String = Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 6))
             If code = GetTeacherCode() Then
                 responseString = "good"
+                frmMain.Log(c.Request.RemoteEndPoint.Address.ToString() & " authed good.")
             Else
                 responseString = "bad"
+                frmMain.Log(c.Request.RemoteEndPoint.Address.ToString() & " authed bad with the teachercode " & code & ".")
             End If
         ElseIf Strings.Left(c.Request.RawUrl, 5) = "/img/" Then
             Dim imagename As String = Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 5))
@@ -64,11 +68,13 @@ Module Server
             If IsNothing(img) Then
                 c.Response.ContentLength64 = 0
                 c.Response.OutputStream.Close()
+                frmMain.Log(c.Request.RemoteEndPoint.Address.ToString() & " asked for nonexistant image """ & imagename & """.")
                 Exit Sub
             End If
             img.Save(c.Response.OutputStream, Imaging.ImageFormat.Png)
             c.Response.OutputStream.Close()
             img.Dispose()
+            frmMain.Log(c.Request.RemoteEndPoint.Address.ToString() & " downloaded image """ & imagename & """.")
             Exit Sub
         End If
 
