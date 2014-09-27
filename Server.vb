@@ -30,8 +30,16 @@ Module Server
         PleaseExit = False
         Exited = False
 
-        Listener.Prefixes.Add("http://localhost:5041/")
-        Listener.Start()
+        Listener.Prefixes.Add("http://*:5041/")
+        Try
+            Listener.Start()
+        Catch ex As Exception
+            MsgBox("Cannot listen for any hostname. Please run as administrator. In the meantime, I will listen for localhost.")
+            Listener = New HttpListener
+            Listener.Prefixes.Clear()
+            Listener.Prefixes.Add("http://localhost:5041/")
+            Listener.Start()
+        End Try
         Dim c As HttpListenerContext
         Do While PleaseExit = False
             Try
