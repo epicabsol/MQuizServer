@@ -24,10 +24,15 @@
         Catch ex As Exception
             frmMain.Log("Error 010: " & ex.ToString)
         End Try
+        Dim oldselectionname As String = frmMain.lstImages.SelectedItem
         frmMain.lstImages.Items.Clear()
         For Each s As String In GetImages()
             frmMain.lstImages.Items.Add(s)
         Next
+        Try
+            frmMain.lstImages.SelectedItem = oldselectionname
+        Catch ex As Exception
+        End Try
     End Sub
 
 #Region "Teacher Code"
