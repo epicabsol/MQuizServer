@@ -26,7 +26,6 @@ Partial Class frmMain
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.cmdStartStop = New Xenon.XenonButton()
         Me.txtLog = New Xenon.XenonTextBox()
-        Me.txtInput = New Xenon.XenonTextBox()
         Me.cmdAdd = New Xenon.XenonButton()
         Me.cmdRemoveImage = New Xenon.XenonButton()
         Me.cmdSetPassword = New Xenon.XenonButton()
@@ -42,7 +41,7 @@ Partial Class frmMain
         Me.PictureBox1.InitialImage = Nothing
         Me.PictureBox1.Location = New System.Drawing.Point(12, 12)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(178, 128)
+        Me.PictureBox1.Size = New System.Drawing.Size(286, 128)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
@@ -55,7 +54,7 @@ Partial Class frmMain
         Me.cmdStartStop.Location = New System.Drawing.Point(12, 146)
         Me.cmdStartStop.MouseOver = False
         Me.cmdStartStop.Name = "cmdStartStop"
-        Me.cmdStartStop.Size = New System.Drawing.Size(178, 38)
+        Me.cmdStartStop.Size = New System.Drawing.Size(286, 38)
         Me.cmdStartStop.TabIndex = 1
         Me.cmdStartStop.Text = "Start"
         Me.cmdStartStop.UseVisualStyleBackColor = True
@@ -66,23 +65,12 @@ Partial Class frmMain
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtLog.Location = New System.Drawing.Point(196, 12)
+        Me.txtLog.Location = New System.Drawing.Point(304, 12)
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
-        Me.txtLog.Size = New System.Drawing.Size(762, 307)
+        Me.txtLog.Size = New System.Drawing.Size(654, 333)
         Me.txtLog.TabIndex = 2
-        '
-        'txtInput
-        '
-        Me.txtInput.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtInput.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.txtInput.Location = New System.Drawing.Point(196, 325)
-        Me.txtInput.Name = "txtInput"
-        Me.txtInput.Size = New System.Drawing.Size(762, 20)
-        Me.txtInput.TabIndex = 3
         '
         'cmdAdd
         '
@@ -104,7 +92,7 @@ Partial Class frmMain
         Me.cmdRemoveImage.Disabled = True
         Me.cmdRemoveImage.Image = Nothing
         Me.cmdRemoveImage.LayeringHost = Nothing
-        Me.cmdRemoveImage.Location = New System.Drawing.Point(119, 325)
+        Me.cmdRemoveImage.Location = New System.Drawing.Point(227, 325)
         Me.cmdRemoveImage.MouseOver = False
         Me.cmdRemoveImage.Name = "cmdRemoveImage"
         Me.cmdRemoveImage.Size = New System.Drawing.Size(71, 20)
@@ -120,7 +108,7 @@ Partial Class frmMain
         Me.cmdSetPassword.Location = New System.Drawing.Point(12, 190)
         Me.cmdSetPassword.MouseOver = False
         Me.cmdSetPassword.Name = "cmdSetPassword"
-        Me.cmdSetPassword.Size = New System.Drawing.Size(178, 20)
+        Me.cmdSetPassword.Size = New System.Drawing.Size(286, 20)
         Me.cmdSetPassword.TabIndex = 6
         Me.cmdSetPassword.Text = "Set Teacher Password..."
         Me.cmdSetPassword.UseVisualStyleBackColor = True
@@ -136,7 +124,7 @@ Partial Class frmMain
         Me.lstImages.IntegralHeight = False
         Me.lstImages.Location = New System.Drawing.Point(12, 216)
         Me.lstImages.Name = "lstImages"
-        Me.lstImages.Size = New System.Drawing.Size(178, 103)
+        Me.lstImages.Size = New System.Drawing.Size(286, 103)
         Me.lstImages.TabIndex = 7
         '
         'tmrRefreshData
@@ -154,7 +142,6 @@ Partial Class frmMain
         Me.Controls.Add(Me.cmdSetPassword)
         Me.Controls.Add(Me.cmdRemoveImage)
         Me.Controls.Add(Me.cmdAdd)
-        Me.Controls.Add(Me.txtInput)
         Me.Controls.Add(Me.txtLog)
         Me.Controls.Add(Me.cmdStartStop)
         Me.Controls.Add(Me.PictureBox1)
@@ -169,7 +156,6 @@ Partial Class frmMain
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents cmdStartStop As Xenon.XenonButton
     Friend WithEvents txtLog As Xenon.XenonTextBox
-    Friend WithEvents txtInput As Xenon.XenonTextBox
     Friend WithEvents cmdAdd As Xenon.XenonButton
     Friend WithEvents cmdRemoveImage As Xenon.XenonButton
     Friend WithEvents cmdSetPassword As Xenon.XenonButton
