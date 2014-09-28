@@ -84,6 +84,10 @@ Module Server
             img.Dispose()
             frmMain.Log(c.Request.RemoteEndPoint.Address.ToString() & " downloaded image """ & imagename & """.")
             Exit Sub
+        ElseIf c.Request.RawUrl = "/imglist/" OrElse c.Request.RawUrl = "/imglist" Then
+            For Each s As String In GetImages()
+                responseString &= s & vbNewLine
+            Next
         End If
 
         Dim response() As Byte = System.Text.Encoding.UTF8.GetBytes(responseString)
