@@ -47,6 +47,8 @@ Module Server
                 Respond(c)
             Catch ex As System.Net.HttpListenerException
                 'Listener.Stop was (probably) called, so no worries here.
+            Catch ex As Exception
+                frmMain.Log("Error: " & ex.ToString)
             End Try
         Loop
         Listener.Stop()
