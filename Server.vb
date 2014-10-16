@@ -38,8 +38,9 @@ Module Server
             Listener = New HttpListener
             Listener.Prefixes.Clear()
             Listener.Prefixes.Add("http://localhost:5041/")
-            Listener.Start()
         End Try
+        'Listener.Prefixes.Add("http://192.168.1.102:5041/")
+        Listener.Start()
         Dim c As HttpListenerContext
         Do While PleaseExit = False
             Try
@@ -63,17 +64,41 @@ Module Server
         c.Request.InputStream.Read(inputbuffer, 0, c.Request.ContentLength64)
         inputstring = System.Text.UTF8Encoding.UTF8.GetString(inputbuffer)
         Dim responseString As String = ""
-        If Strings.Left(c.Request.RawUrl, 6) = "/auth-" Then
-            Dim code As String = Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 6))
-            If code = GetTeacherCode() Then
-                responseString = "good"
-                frmMain.Log(c.Request.RemoteEndPoint.Address.ToString() & " authed good.")
+        If Strings.Left(c.Request.RawUrl, 14) = "/student/auth-" Then '----------------------------------Auth Password
+            Dim buffer() As String = Strings.Split(Decrypt(c.Request.RawUrl), "/")
+            Dim buffer2() As String = Strings.Split(buffer(buffer.Length - 1), "-") 'should result in 'auth', 'username', 'code'
+            If AuthUser(buffer2(1), Encrypt(buffer2(2))) = True Then
+                responseString = "true"
             Else
-                responseString = "bad"
-                frmMain.Log(c.Request.RemoteEndPoint.Address.ToString() & " authed bad with the teachercode " & code & ".")
+                responseString = "false"
             End If
-        ElseIf Strings.Left(c.Request.RawUrl, 5) = "/img/" Then
-            Dim imagename As String = Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 5))
+        ElseIf Strings.Left(c.Request.RawUrl, 13) = "/student/get-" Then '-----------------------------------Get Password
+            Dim name As String = Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 13)
+            responseString = GetUserPassword(name)
+        ElseIf Strings.Left(c.Request.RawUrl, 13) = "/student/set-" Then '-----------------------------------Set Password
+            Dim buffer() As String = Strings.Split(Decrypt(c.Request.RawUrl), "/")
+            Dim buffer2() As String = Strings.Split(buffer(buffer.Length - 1), "-") 'should result in 'auth', 'username', 'code'
+            SetUserPassword(buffer2(1), buffer2(2))
+        ElseIf Strings.Left(c.Request.RawUrl, 16) = "/student/remove-" Then '--------------------------------Remove Student
+            Dim name As String = Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 16)
+            RemoveUser(Decrypt(name))
+        ElseIf Strings.Left(c.Request.RawUrl, 13) = "/student/add-" Then '-----------------------------------Add Student
+            Dim buffer() As String = Strings.Split(Decrypt(c.Request.RawUrl), "/")
+            Dim buffer2() As String = Strings.Split(buffer(buffer.Length - 1), "-") 'should result in 'auth', 'username', 'code'
+            AddUser(buffer2(1), buffer2(2))
+        ElseIf Strings.Left(c.Request.RawUrl, 10) = "/ptime/get" Then
+            responseString = GetPracticeTime()
+        ElseIf Strings.Left(c.Request.RawUrl, 10) = "/rtime/get" Then
+            responseString = GetRecordingTime()
+        ElseIf Strings.Left(c.Request.RawUrl, 10) = "/ptime/set" Then
+            SetPracticeTime(Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 11)))
+        ElseIf Strings.Left(c.Request.RawUrl, 10) = "/rtime/set" Then
+            SetRecordingTime(Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 11)))
+        ElseIf Strings.Left(c.Request.RawUrl, 12) = "/img/remove-" Then
+            Dim name As String = Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 12)
+            RemoveImage(name)
+        ElseIf Strings.Left(c.Request.RawUrl, 9) = "/img/get-" Then '----------------------------------------Get Image
+            Dim imagename As String = Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 9))
             Dim img As Image = GetImage(imagename)
             If IsNothing(img) Then
                 c.Response.ContentLength64 = 0
@@ -81,12 +106,16 @@ Module Server
                 frmMain.Log(c.Request.RemoteEndPoint.Address.ToString() & " asked for nonexistant image """ & imagename & """.")
                 Exit Sub
             End If
-            img.Save(c.Response.OutputStream, Imaging.ImageFormat.Png)
-            c.Response.OutputStream.Close()
+            Dim temp As New IO.MemoryStream()
+            img.Save(temp, Imaging.ImageFormat.Png)
             img.Dispose()
+            temp.WriteTo(c.Response.OutputStream)
+            c.Response.ContentLength64 = temp.Length
+            temp.Dispose()
+            c.Response.OutputStream.Close()
             frmMain.Log(c.Request.RemoteEndPoint.Address.ToString() & " downloaded image """ & imagename & """.")
             Exit Sub
-        ElseIf c.Request.RawUrl = "/imglist/" OrElse c.Request.RawUrl = "/imglist" Then
+        ElseIf Strings.Left(c.Request.RawUrl, 9) = "/img/list" Then
             For Each s As String In GetImages()
                 responseString &= s & vbNewLine
             Next

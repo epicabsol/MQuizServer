@@ -8,6 +8,7 @@
         If Not txtLog.IsHandleCreated Then
             CreateHandle()
         End If
+        
     End Sub
 
     Private Sub tmrRefreshData_Tick(sender As Object, e As EventArgs) Handles tmrRefreshData.Tick
