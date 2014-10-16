@@ -73,14 +73,14 @@ Module Server
                 responseString = "false"
             End If
         ElseIf Strings.Left(c.Request.RawUrl, 13) = "/student/get-" Then '-----------------------------------Get Password
-            Dim name As String = Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 13)
+            Dim name As String = Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 13))
             responseString = GetUserPassword(name)
         ElseIf Strings.Left(c.Request.RawUrl, 13) = "/student/set-" Then '-----------------------------------Set Password
             Dim buffer() As String = Strings.Split(Decrypt(c.Request.RawUrl), "/")
             Dim buffer2() As String = Strings.Split(buffer(buffer.Length - 1), "-") 'should result in 'auth', 'username', 'code'
             SetUserPassword(buffer2(1), buffer2(2))
         ElseIf Strings.Left(c.Request.RawUrl, 16) = "/student/remove-" Then '--------------------------------Remove Student
-            Dim name As String = Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 16)
+            Dim name As String = Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 16))
             RemoveUser(Decrypt(name))
         ElseIf Strings.Left(c.Request.RawUrl, 13) = "/student/add-" Then '-----------------------------------Add Student
             Dim buffer() As String = Strings.Split(Decrypt(c.Request.RawUrl), "/")
@@ -99,7 +99,7 @@ Module Server
         ElseIf Strings.Left(c.Request.RawUrl, 10) = "/rtime/set" Then
             SetRecordingTime(Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 11)))
         ElseIf Strings.Left(c.Request.RawUrl, 12) = "/img/remove-" Then
-            Dim name As String = Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 12)
+            Dim name As String = Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 12))
             RemoveImage(name)
         ElseIf Strings.Left(c.Request.RawUrl, 9) = "/img/get-" Then '----------------------------------------Get Image
             Dim imagename As String = Decrypt(Strings.Right(c.Request.RawUrl, Len(c.Request.RawUrl) - 9))
