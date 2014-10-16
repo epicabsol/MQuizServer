@@ -86,6 +86,10 @@ Module Server
             Dim buffer() As String = Strings.Split(Decrypt(c.Request.RawUrl), "/")
             Dim buffer2() As String = Strings.Split(buffer(buffer.Length - 1), "-") 'should result in 'auth', 'username', 'code'
             AddUser(buffer2(1), buffer2(2))
+        ElseIf c.Request.RawUrl = "/student/list" Then
+            For Each s As String In GetUserList()
+                responseString &= s & vbNewLine
+            Next
         ElseIf Strings.Left(c.Request.RawUrl, 10) = "/ptime/get" Then
             responseString = GetPracticeTime()
         ElseIf Strings.Left(c.Request.RawUrl, 10) = "/rtime/get" Then
