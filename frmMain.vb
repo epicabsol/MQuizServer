@@ -8,7 +8,11 @@
         If Not txtLog.IsHandleCreated Then
             CreateHandle()
         End If
-        
+        If My.Application.CommandLineArgs.Contains("-s") Then
+            cmdStartStop.Text = "Stop"
+            StartServer()
+            PictureBox1.Image = My.Resources.online_button_x128
+        End If
     End Sub
 
     Private Sub tmrRefreshData_Tick(sender As Object, e As EventArgs) Handles tmrRefreshData.Tick
@@ -67,7 +71,7 @@
         browser.ShowDialog()
         browser.Dispose()
         If browser.FileName = "" Then Exit Sub
-        Dim name As String = InputBox("What do you wan to call this image?", "Add Image", "")
+        Dim name As String = InputBox("What do you want to call this image?", "Add Image", "")
         If name = "" Then Exit Sub
         Dim newpic As New Bitmap(browser.FileName)
         AddImage(newpic, name)

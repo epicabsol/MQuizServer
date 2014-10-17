@@ -69,7 +69,8 @@ Partial Class frmMain
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
-        Me.txtLog.Size = New System.Drawing.Size(654, 333)
+        Me.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtLog.Size = New System.Drawing.Size(600, 333)
         Me.txtLog.TabIndex = 2
         '
         'cmdAdd
@@ -137,7 +138,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(32, Byte), Integer), CType(CType(32, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(970, 357)
+        Me.ClientSize = New System.Drawing.Size(916, 357)
         Me.Controls.Add(Me.lstImages)
         Me.Controls.Add(Me.cmdSetPassword)
         Me.Controls.Add(Me.cmdRemoveImage)

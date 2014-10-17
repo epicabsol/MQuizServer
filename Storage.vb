@@ -74,6 +74,10 @@
 #End Region
 
 #Region "Images"
+    Public Function ImageExists(name As String) As Boolean
+        Return IO.File.Exists(ImageNameToPath(name))
+    End Function
+
     Public Function GetImage(name As String) As Bitmap
         If IO.File.Exists(ImageNameToPath(name)) Then
             Try
