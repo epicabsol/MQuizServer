@@ -130,8 +130,8 @@ Module Server
             Dim temp As New IO.MemoryStream()
             img.Save(temp, Imaging.ImageFormat.Png)
             img.Dispose()
+            c.Response.ContentLength64 = temp.Length
             temp.WriteTo(c.Response.OutputStream)
-            'c.Response.ContentLength64 = temp.Length
             temp.Dispose()
             c.Response.OutputStream.Close()
             frmMain.Log(c.Request.RemoteEndPoint.Address.ToString() & " downloaded image """ & imagename & """.")
