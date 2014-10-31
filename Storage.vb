@@ -6,23 +6,23 @@
             frmMain.Log("Error 007: " & ex.ToString)
         End Try
         Try
-            If Not System.IO.Directory.Exists("Data\Images") Then
-                System.IO.Directory.CreateDirectory("Data\Images")
+            If Not System.IO.Directory.Exists("Data/Images") Then
+                System.IO.Directory.CreateDirectory("Data/Images")
             End If
         Catch ex As Exception
             frmMain.Log("Error 015: " & ex.ToString)
         End Try
         Try
-            If Not System.IO.Directory.Exists("Data\Students") Then
-                System.IO.Directory.CreateDirectory("Data\Students")
+            If Not System.IO.Directory.Exists("Data/Students") Then
+                System.IO.Directory.CreateDirectory("Data/Students")
             End If
         Catch ex As Exception
             frmMain.Log("Error 016: " & ex.ToString)
         End Try
         Try
-            If Not IO.File.Exists("Data\teachercode.dat") Then
+            If Not IO.File.Exists("Data/teachercode.dat") Then
                 Try
-                    Dim i As New IO.StreamWriter(IO.File.OpenWrite("Data\teachercode.dat"))
+                    Dim i As New IO.StreamWriter(IO.File.OpenWrite("Data/teachercode.dat"))
                     i.Write("")
                     i.Close()
                     i.Dispose()
@@ -34,7 +34,7 @@
             frmMain.Log("Error 008: " & ex.ToString)
         End Try
         Try
-            _teachercode = Decrypt(System.IO.File.ReadAllText("Data\teachercode.dat"))
+            _teachercode = Decrypt(System.IO.File.ReadAllText("Data/teachercode.dat"))
         Catch ex As Exception
             frmMain.Log("Error 010: " & ex.ToString)
         End Try
@@ -57,12 +57,12 @@
 
     Public Sub SetTeacherCode(NewCode As String)
         Try
-            System.IO.File.Delete("Data\teachercode.dat")
+            System.IO.File.Delete("Data/teachercode.dat")
         Catch ex As Exception
             frmMain.Log("Error 005: " & ex.ToString)
         End Try
         Try
-            Dim writer As IO.StreamWriter = System.IO.File.CreateText("Data\teachercode.dat")
+            Dim writer As IO.StreamWriter = System.IO.File.CreateText("Data/teachercode.dat")
             writer.Write(Encrypt(NewCode))
             writer.Close()
             writer.Dispose()
@@ -94,7 +94,7 @@
     Public Function GetImages() As List(Of String)
         Dim result As New List(Of String)
         Try
-            For Each s As String In IO.Directory.EnumerateFiles("Data\Images\")
+            For Each s As String In IO.Directory.EnumerateFiles("Data/Images/")
                 If Strings.Left(IO.Path.GetFileNameWithoutExtension(s), 4) = "img-" Then
                     result.Add(ImagePathToName(s))
                 End If
@@ -133,7 +133,7 @@
     Public Function GetUserList() As List(Of String)
         Dim result As New List(Of String)
         Try
-            For Each s As String In IO.Directory.EnumerateFiles("Data\Students\")
+            For Each s As String In IO.Directory.EnumerateFiles("Data/Students/")
                 If Strings.Left(IO.Path.GetFileNameWithoutExtension(s), 8) = "student-" Then
                     result.Add(StudentPathToName(s))
                 End If
@@ -210,19 +210,19 @@
 
 #Region "Path Creation Helpers"
     Private Function ImageNameToPath(Name As String) As String
-        Return "Data\Images\img-" & Name & ".png"
+        Return "Data/Images/img-" & Name & ".png"
     End Function
     Private Function ImagePathToName(Path As String) As String
         Return Strings.Right(IO.Path.GetFileNameWithoutExtension(Path), Len(IO.Path.GetFileNameWithoutExtension(Path)) - 4)
     End Function
     Private Function StudentNameToPath(id As String) As String
-        Return "Data\Students\student-" & id & ".dat"
+        Return "Data/Students/student-" & id & ".dat"
     End Function
     Private Function StudentPathToName(Path As String) As String
         Return Strings.Right(IO.Path.GetFileNameWithoutExtension(Path), Len(IO.Path.GetFileNameWithoutExtension(Path)) - 8)
     End Function
     Private Function TimePath() As String
-        Return "Data\Time.dat"
+        Return "Data/Time.dat"
     End Function
 #End Region
 

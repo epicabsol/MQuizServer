@@ -23,6 +23,7 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.cmdStartStop = New Xenon.XenonButton()
         Me.txtLog = New Xenon.XenonTextBox()
@@ -147,6 +148,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.cmdStartStop)
         Me.Controls.Add(Me.PictureBox1)
         Me.DoubleBuffered = True
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmMain"
         Me.Text = "MQuiz Server"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

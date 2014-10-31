@@ -4,27 +4,39 @@
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        RefreshData()
-        If Not txtLog.IsHandleCreated Then
-            CreateHandle()
-        End If
-        If My.Application.CommandLineArgs.Contains("-s") Then
-            cmdStartStop.Text = "Stop"
-            StartServer()
-            PictureBox1.Image = My.Resources.online_button_x128
-        End If
+        Try
+
+            RefreshData()
+            If Not txtLog.IsHandleCreated Then
+                CreateHandle()
+            End If
+            If My.Application.CommandLineArgs.Contains("-s") Then
+                cmdStartStop.Text = "Stop"
+                StartServer()
+                PictureBox1.Image = My.Resources.online_button_x128
+            End If
+        Catch ex As Exception
+            MsgBox("Fatal Exception Loading: " & ex.ToString)
+            Close()
+        End Try
     End Sub
 
     Private Sub tmrRefreshData_Tick(sender As Object, e As EventArgs) Handles tmrRefreshData.Tick
-        If txtLog.InvokeRequired Then
-            Me.Invoke(New Action(Of Object, EventArgs)(AddressOf tmrRefreshData_Tick), sender, e)
-        Else
-            For i As Long = LogQueue.Count - 1 To 0 Step -1
-                txtLog.AppendText(vbNewLine & LogQueue(i))
-                LogQueue.RemoveAt(i)
-            Next
-            RefreshData()
-        End If
+        Try
+
+            If txtLog.InvokeRequired Then
+                Me.Invoke(New Action(Of Object, EventArgs)(AddressOf tmrRefreshData_Tick), sender, e)
+            Else
+                For i As Long = LogQueue.Count - 1 To 0 Step -1
+                    txtLog.AppendText(vbNewLine & LogQueue(i))
+                    LogQueue.RemoveAt(i)
+                Next
+                RefreshData()
+            End If
+        Catch ex As Exception
+            MsgBox("Fatal Exception Ticking Refresh: " & ex.ToString)
+            Close()
+        End Try
     End Sub
 
     Private Sub cmdSetPassword_Click(sender As Object, e As EventArgs) Handles cmdSetPassword.Click
