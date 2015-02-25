@@ -170,7 +170,7 @@
     End Sub
 
     Public Function AuthUser(id As String, code As String) As Boolean
-        Return GetUserPassword(id) = code
+        Return (Not (id = "" OrElse code = "")) AndAlso GetUserPassword(id) = code
     End Function
 #End Region
 

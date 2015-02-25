@@ -49,7 +49,6 @@ Partial Class frmMain
         '
         'cmdStartStop
         '
-        Me.cmdStartStop.Disabled = True
         Me.cmdStartStop.Image = Nothing
         Me.cmdStartStop.LayeringHost = Nothing
         Me.cmdStartStop.Location = New System.Drawing.Point(12, 146)
@@ -77,7 +76,6 @@ Partial Class frmMain
         'cmdAdd
         '
         Me.cmdAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdAdd.Disabled = True
         Me.cmdAdd.Image = Nothing
         Me.cmdAdd.LayeringHost = Nothing
         Me.cmdAdd.Location = New System.Drawing.Point(12, 325)
@@ -91,7 +89,6 @@ Partial Class frmMain
         'cmdRemoveImage
         '
         Me.cmdRemoveImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdRemoveImage.Disabled = True
         Me.cmdRemoveImage.Image = Nothing
         Me.cmdRemoveImage.LayeringHost = Nothing
         Me.cmdRemoveImage.Location = New System.Drawing.Point(227, 325)
@@ -104,7 +101,6 @@ Partial Class frmMain
         '
         'cmdSetPassword
         '
-        Me.cmdSetPassword.Disabled = True
         Me.cmdSetPassword.Image = Nothing
         Me.cmdSetPassword.LayeringHost = Nothing
         Me.cmdSetPassword.Location = New System.Drawing.Point(12, 190)
